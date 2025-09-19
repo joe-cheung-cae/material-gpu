@@ -241,9 +241,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🏗️ Build Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `ENABLE_CUDA` | `OFF` | Enable CUDA support for GPU acceleration |
+| Option             | Default   | Description                                 |
+| ------------------ | --------- | ------------------------------------------- |
+| `ENABLE_CUDA`      | `OFF`     | Enable CUDA support for GPU acceleration    |
 | `CMAKE_BUILD_TYPE` | `Release` | Build type (Release, Debug, RelWithDebInfo) |
 
 ## 🐛 Troubleshooting
