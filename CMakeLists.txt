@@ -51,13 +51,14 @@ target_link_libraries(example PRIVATE material)
 
 # Testing support
 option(BUILD_TESTING "Build the testing tree" ON)
+
 if(BUILD_TESTING)
   # Add Google Test
   add_subdirectory(third_party/googletest)
-  
+
   # Enable CTest
   enable_testing()
-  
+
   # Add test subdirectory
   add_subdirectory(tests)
 endif()

@@ -3,9 +3,12 @@
 # Test executable
 add_executable(material_tests
     test_main.cpp
+    test_contact_models.cpp
     test_contact_models_simple.cpp
     test_factory_simple.cpp
+    test_json_loader.cpp
     test_json_simple.cpp
+    test_material_builder.cpp
 )
 
 # Link with the material library and Google Test
