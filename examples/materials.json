@@ -1,0 +1,100 @@
+{
+    "materials": [
+        {
+            "type": "eepa",
+            "name": "High_Strength_Steel",
+            "elastic": {
+                "young_modulus": 2.1e11,
+                "poisson_ratio": 0.29,
+                "density": 7850
+            },
+            "contact": {
+                "type": "eepa",
+                "kn": 1e6,
+                "kt": 5e5,
+                "gamma_n": 0.3,
+                "gamma_t": 0.15
+            },
+            "thermal": {
+                "conductivity": 50.0,
+                "heat_capacity": 500
+            }
+        },
+        {
+            "type": "eepa",
+            "name": "Concrete_Mix",
+            "elastic": {
+                "young_modulus": 1.0e7,
+                "poisson_ratio": 0.25,
+                "density": 2500
+            },
+            "contact": {
+                "type": "eepa",
+                "kn": 5e4,
+                "kt": 2e4,
+                "gamma_n": 0.2,
+                "gamma_t": 0.1
+            },
+            "thermal": {
+                "conductivity": 1.5,
+                "heat_capacity": 880
+            }
+        },
+        {
+            "type": "jkr",
+            "name": "Polymer_Adhesive",
+            "elastic": {
+                "young_modulus": 5.0e6,
+                "poisson_ratio": 0.4,
+                "density": 1200
+            },
+            "contact": {
+                "type": "jkr",
+                "work_of_adhesion": 0.08,
+                "contact_radius0": 1.5e-4
+            },
+            "electromagnetic": {
+                "permittivity": 8.85e-12,
+                "permeability": 1.26e-6,
+                "conductivity": 1e-8
+            }
+        },
+        {
+            "type": "standard",
+            "name": "Generic_Elastic",
+            "elastic": {
+                "young_modulus": 3.0e9,
+                "poisson_ratio": 0.35,
+                "density": 1200
+            },
+            "contact": {
+                "type": "none"
+            }
+        },
+        {
+            "type": "eepa",
+            "name": "Aluminum_Alloy",
+            "elastic": {
+                "young_modulus": 7.0e10,
+                "poisson_ratio": 0.33,
+                "density": 2700
+            },
+            "contact": {
+                "type": "eepa",
+                "kn": 8e5,
+                "kt": 4e5,
+                "gamma_n": 0.25,
+                "gamma_t": 0.12
+            },
+            "thermal": {
+                "conductivity": 200.0,
+                "heat_capacity": 900
+            },
+            "electromagnetic": {
+                "permittivity": 8.85e-12,
+                "permeability": 1.26e-6,
+                "conductivity": 3.5e7
+            }
+        }
+    ]
+}

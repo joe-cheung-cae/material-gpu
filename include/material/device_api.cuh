@@ -1,6 +1,6 @@
 #pragma once
+#include "material/device_material_views.cuh"
 #include "material/device_qualifier.cuh"
-#include "material/types.hpp"
 
 #include <cuda_runtime.h>
 

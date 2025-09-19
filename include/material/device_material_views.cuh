@@ -3,6 +3,7 @@
 #include "material/device_qualifier.cuh"
 #include "material/property_mixins.hpp"
 
+#include <cmath>
 #include <type_traits>
 
 namespace matgpu {

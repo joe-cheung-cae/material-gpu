@@ -2,18 +2,24 @@ cmake_minimum_required(VERSION 3.20)
 project(material_gpu LANGUAGES C CXX)
 
 # Option to enable CUDA
-option(ENABLE_CUDA "Build with CUDA support" ON)
+option(ENABLE_CUDA "Build with CUDA support" OFF)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-include(FetchContent)
-FetchContent_Declare(
-  nlohmann_json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG v3.11.3
-)
-FetchContent_MakeAvailable(nlohmann_json)
+
+# Try to find nlohmann_json package first
+find_package(nlohmann_json QUIET)
+
+if(NOT nlohmann_json_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    nlohmann_json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+  )
+  FetchContent_MakeAvailable(nlohmann_json)
+endif()
 
 if(ENABLE_CUDA)
   enable_language(CUDA)
@@ -26,13 +32,7 @@ endif()
 
 add_library(material STATIC)
 
-target_sources(material PRIVATE src/material.cpp src/json_loader.cpp src/grouping.cpp src/validation.cpp src/enhanced_json_loader.cpp)
-
-if(ENABLE_CUDA)
-  target_sources(material PRIVATE src/material_device.cu)
-else()
-  target_sources(material PRIVATE src/material_device_stub.cpp)
-endif()
+target_sources(material PRIVATE src/json_loader.cpp)
 
 # Public headers
 target_include_directories(material PUBLIC include)
@@ -46,15 +46,15 @@ if(ENABLE_CUDA)
   set_target_properties(material PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 endif()
 
-add_executable(example examples/enhanced_example.cpp)
+add_executable(example examples/example.cpp)
 
 if(ENABLE_CUDA)
-  set_source_files_properties(examples/enhanced_example.cpp PROPERTIES LANGUAGE CXX)
+  set_source_files_properties(examples/example.cpp PROPERTIES LANGUAGE CXX)
   set_target_properties(example PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
   set_target_properties(example PROPERTIES CUDA_RESOLVE_DEVICE_SYMBOLS ON)
 else()
   # allow host-only example
-  set_source_files_properties(examples/enhanced_example.cpp PROPERTIES LANGUAGE CXX)
+  set_source_files_properties(examples/example.cpp PROPERTIES LANGUAGE CXX)
 endif()
 
 target_link_libraries(example PRIVATE material)

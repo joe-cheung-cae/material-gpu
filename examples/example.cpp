@@ -1,5 +1,5 @@
 #include "material/device_material_views.cuh"
-#include "material/enhanced_json_loader.hpp"
+#include "material/json_loader.hpp"
 #include "material/material_factory.hpp"
 
 #include <iostream>
@@ -71,25 +71,26 @@ void example_json_loading() {
     std::string json_text = R"({
         "materials": [
             {
-                "elastic": {"young": 2.1e11, "poisson": 0.29, "density": 7850},
-                "contact_model": "EEPA",
-                "eepa": {"kn": 1e6, "kt": 5e5, "gamma_n": 0.3, "gamma_t": 0.15},
+                "type": "eepa",
+                "elastic": {"young_modulus": 2.1e11, "poisson_ratio": 0.29, "density": 7850},
+                "contact": {"type": "eepa", "kn": 1e6, "kt": 5e5, "gamma_n": 0.3, "gamma_t": 0.15},
                 "thermal": {"conductivity": 50.0, "heat_capacity": 500}
             },
             {
-                "elastic": {"young": 1.0e7, "poisson": 0.25, "density": 2500},
-                "contact_model": "JKR",
-                "jkr": {"work_of_adhesion": 0.08, "contact_radius0": 1.5e-4},
-                "em": {"permittivity": 8.85e-12, "permeability": 1.26e-6, "conductivity": 1e-6}
+                "type": "jkr",
+                "elastic": {"young_modulus": 1.0e7, "poisson_ratio": 0.25, "density": 2500},
+                "contact": {"type": "jkr", "work_of_adhesion": 0.08, "contact_radius0": 1.5e-4},
+                "electromagnetic": {"permittivity": 8.85e-12, "permeability": 1.26e-6, "conductivity": 1e-6}
             },
             {
-                "elastic": {"young": 3.0e9, "poisson": 0.35, "density": 1200},
-                "contact_model": "None"
+                "type": "standard",
+                "elastic": {"young_modulus": 3.0e9, "poisson_ratio": 0.35, "density": 1200},
+                "contact": {"type": "none"}
             }
         ]
     })";
 
-    MaterialsV2 materials;
+    Materials materials;
     if (materials.load_from_json_text(json_text)) {
         std::cout << "Successfully loaded " << materials.count() << " materials from JSON" << std::endl;
 
