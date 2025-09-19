@@ -8,18 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Try to find nlohmann_json package first
-find_package(nlohmann_json QUIET)
-
-if(NOT nlohmann_json_FOUND)
-  include(FetchContent)
-  FetchContent_Declare(
-    nlohmann_json
-    GIT_REPOSITORY https://github.com/nlohmann/json.git
-    GIT_TAG v3.11.3
-  )
-  FetchContent_MakeAvailable(nlohmann_json)
-endif()
+# Use nlohmann_json from git submodule
+add_subdirectory(third_party/nlohmann_json)
 
 if(ENABLE_CUDA)
   enable_language(CUDA)
