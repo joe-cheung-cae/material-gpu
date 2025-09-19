@@ -1,0 +1,26 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+BreakBeforeBraces: Attach
+PointerAlignment: Left
+DerivePointerAlignment: false
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesBeforeTrailingComments: 1
+AlignTrailingComments: true
+AlignConsecutiveAssignments: true
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<cuda/.*>'
+    Priority: 2
+  - Regex: '^<nlohmann/.*>'
+    Priority: 3
+  - Regex: '^"material/.*"'
+    Priority: 1
+  - Regex: '.*'
+    Priority: 4

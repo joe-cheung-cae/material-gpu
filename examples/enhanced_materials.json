@@ -1,0 +1,106 @@
+{
+    "materials": [
+        {
+            "name": "High_Strength_Steel",
+            "elastic": {
+                "young": 2.1e11,
+                "poisson": 0.29,
+                "density": 7850
+            },
+            "contact_model": "EEPA",
+            "eepa": {
+                "kn": 1e6,
+                "kt": 5e5,
+                "gamma_n": 0.3,
+                "gamma_t": 0.15
+            },
+            "thermal": {
+                "conductivity": 50.0,
+                "heat_capacity": 500
+            }
+        },
+        {
+            "name": "Concrete_Mix",
+            "elastic": {
+                "young": 1.0e7,
+                "poisson": 0.25,
+                "density": 2500
+            },
+            "contact_model": "EEPA",
+            "eepa": {
+                "kn": 5e4,
+                "kt": 2e4,
+                "gamma_n": 0.2,
+                "gamma_t": 0.1
+            },
+            "thermal": {
+                "conductivity": 1.5,
+                "heat_capacity": 880
+            }
+        },
+        {
+            "name": "Polymer_Adhesive",
+            "elastic": {
+                "young": 5.0e6,
+                "poisson": 0.4,
+                "density": 1200
+            },
+            "contact_model": "JKR",
+            "jkr": {
+                "work_of_adhesion": 0.08,
+                "contact_radius0": 1.5e-4
+            },
+            "em": {
+                "permittivity": 8.85e-12,
+                "permeability": 1.26e-6,
+                "conductivity": 1e-6
+            }
+        },
+        {
+            "name": "Ceramic_Insulator",
+            "elastic": {
+                "young": 3.5e11,
+                "poisson": 0.22,
+                "density": 3800
+            },
+            "contact_model": "EEPA",
+            "eepa": {
+                "kn": 2e6,
+                "kt": 8e5,
+                "gamma_n": 0.1,
+                "gamma_t": 0.05
+            },
+            "thermal": {
+                "conductivity": 25.0,
+                "heat_capacity": 750
+            },
+            "em": {
+                "permittivity": 8.85e-11,
+                "permeability": 1.26e-6,
+                "conductivity": 1e-12
+            }
+        },
+        {
+            "name": "Soft_Rubber",
+            "elastic": {
+                "young": 1.0e6,
+                "poisson": 0.48,
+                "density": 900
+            },
+            "contact_model": "JKR",
+            "jkr": {
+                "work_of_adhesion": 0.15,
+                "contact_radius0": 2e-4
+            }
+        },
+        {
+            "name": "Glass_Fiber",
+            "elastic": {
+                "young": 7.0e10,
+                "poisson": 0.24,
+                "density": 2550
+            },
+            "contact_model": "None"
+        }
+    ]
+}
