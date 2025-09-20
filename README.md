@@ -67,10 +67,10 @@ git submodule update --init --recursive
 
 #### Quick Start: CPU vs CUDA
 
-| Scenario         | Configure Command                                                | Build Command           | Run Commands (examples)                               |
-| ---------------- | ---------------------------------------------------------------- | ----------------------- | ------------------------------------------------------ |
-| CUDA-enabled (default) | `cmake -B build -DCMAKE_BUILD_TYPE=Release`                | `cmake --build build -j`| `./build/example` · `./build/gpu_benchmark`           |
-| CPU-only         | `cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF`    | `cmake --build build -j`| `./build/basic_demo` · `./build/advanced_gpu_demo 200 0.5 50` |
+| Scenario               | Configure Command                                             | Build Command            | Run Commands (examples)                                       |
+| ---------------------- | ------------------------------------------------------------- | ------------------------ | ------------------------------------------------------------- |
+| CUDA-enabled (default) | `cmake -B build -DCMAKE_BUILD_TYPE=Release`                   | `cmake --build build -j` | `./build/example` · `./build/gpu_benchmark`                   |
+| CPU-only               | `cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF` | `cmake --build build -j` | `./build/basic_demo` · `./build/advanced_gpu_demo 200 0.5 50` |
 
 Copy-paste setup:
 
