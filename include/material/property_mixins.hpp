@@ -183,12 +183,16 @@ class CompleteMaterialMixin : public ThermalMixin<Derived>, public Electromagnet
 // Device-side views for optional properties
 struct DeviceThermalView {
     float conductivity;
-    float heat_capacity;
+    float capacity;
     bool enabled;
 
-    DEVICE_QUALIFIER bool has_thermal() const { return enabled; }
-    DEVICE_QUALIFIER float k() const { return conductivity; }
-    DEVICE_QUALIFIER float cp() const { return heat_capacity; }
+    HOST_DEVICE_QUALIFIER DeviceThermalView() : conductivity(0), capacity(0), enabled(false) {}
+    HOST_DEVICE_QUALIFIER DeviceThermalView(float k, float cp, bool en = true)
+        : conductivity(k), capacity(cp), enabled(en) {}
+
+    HOST_DEVICE_QUALIFIER bool has_thermal() const { return enabled; }
+    HOST_DEVICE_QUALIFIER float k() const { return conductivity; }
+    HOST_DEVICE_QUALIFIER float cp() const { return capacity; }
 };
 
 struct DeviceElectromagneticView {
@@ -197,10 +201,15 @@ struct DeviceElectromagneticView {
     float conductivity;
     bool enabled;
 
-    DEVICE_QUALIFIER bool has_em() const { return enabled; }
-    DEVICE_QUALIFIER float eps() const { return permittivity; }
-    DEVICE_QUALIFIER float mu() const { return permeability; }
-    DEVICE_QUALIFIER float sigma() const { return conductivity; }
+    HOST_DEVICE_QUALIFIER DeviceElectromagneticView()
+        : permittivity(0), permeability(0), conductivity(0), enabled(false) {}
+    HOST_DEVICE_QUALIFIER DeviceElectromagneticView(float eps, float mu, float sigma, bool en = true)
+        : permittivity(eps), permeability(mu), conductivity(sigma), enabled(en) {}
+
+    HOST_DEVICE_QUALIFIER bool has_em() const { return enabled; }
+    HOST_DEVICE_QUALIFIER float eps() const { return permittivity; }
+    HOST_DEVICE_QUALIFIER float mu() const { return permeability; }
+    HOST_DEVICE_QUALIFIER float sigma() const { return conductivity; }
 };
 
 // Optional wrapper for device views (similar to std::optional but for device code)
@@ -208,16 +217,16 @@ template <typename T> struct DeviceOptional {
     T value;
     bool present;
 
-    DEVICE_QUALIFIER DeviceOptional() : present(false) {}
-    DEVICE_QUALIFIER DeviceOptional(const T& val) : value(val), present(true) {}
+    HOST_DEVICE_QUALIFIER DeviceOptional() : present(false) {}
+    HOST_DEVICE_QUALIFIER DeviceOptional(const T& val) : value(val), present(true) {}
 
-    DEVICE_QUALIFIER bool has_value() const { return present; }
-    DEVICE_QUALIFIER const T& get() const { return value; }
-    DEVICE_QUALIFIER T& get() { return value; }
+    HOST_DEVICE_QUALIFIER bool has_value() const { return present; }
+    HOST_DEVICE_QUALIFIER const T& get() const { return value; }
+    HOST_DEVICE_QUALIFIER T& get() { return value; }
 
-    DEVICE_QUALIFIER explicit operator bool() const { return present; }
-    DEVICE_QUALIFIER const T& operator*() const { return value; }
-    DEVICE_QUALIFIER T& operator*() { return value; }
+    HOST_DEVICE_QUALIFIER explicit operator bool() const { return present; }
+    HOST_DEVICE_QUALIFIER const T& operator*() const { return value; }
+    HOST_DEVICE_QUALIFIER T& operator*() { return value; }
 };
 
 } // namespace matgpu

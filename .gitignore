@@ -1,5 +1,9 @@
 # Build directories
 build/
+build_cuda/
+build*/
+cmake-build-debug/
+cmake-build-release/
 _build/
 out/
 
@@ -30,6 +34,13 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 *.cmake
+compile_commands.json
+
+# CTest/Build artifacts
+Testing/
+CTestTestfile.cmake
+CTestTestfile.yaml
+CTestCostData.txt
 
 # CUDA compiled files
 *.cubin
@@ -43,3 +54,17 @@ docs/_build/
 *.tmp
 *.temp
 *.log
+
+# Test files (temporary)
+*_test.cpp
+*_test.cu
+cuda_test*
+simple_test*
+material_test*
+
+# Scripts (temporary)
+run_tests_manual.sh
+status_check.sh
+
+# Cache directories
+.cache/

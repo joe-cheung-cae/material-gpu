@@ -4,6 +4,8 @@
 // compilers.
 #if defined(__CUDACC__)
 #define DEVICE_QUALIFIER __device__ __forceinline__
+#define HOST_DEVICE_QUALIFIER __host__ __device__ __forceinline__
 #else
 #define DEVICE_QUALIFIER inline
+#define HOST_DEVICE_QUALIFIER inline
 #endif

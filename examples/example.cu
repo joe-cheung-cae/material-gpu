@@ -1,3 +1,10 @@
+// CUDA example file - compiled with nvcc
+#ifdef __CUDACC__
+// When compiling with nvcc, ensure CUDA runtime is available
+#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
+#endif
+
 #include "material/contact_models.hpp"
 #include "material/device_material_views.cuh"
 #include "material/json_loader.hpp"

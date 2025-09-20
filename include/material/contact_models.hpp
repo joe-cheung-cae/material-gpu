@@ -207,11 +207,11 @@ class ContactModelFactory {
 struct DeviceEEPAContactView {
     float kn, kt, gamma_n, gamma_t;
 
-    DEVICE_QUALIFIER float normal_force(float overlap, float velocity) const {
+    HOST_DEVICE_QUALIFIER float normal_force(float overlap, float velocity) const {
         return kn * overlap + gamma_n * velocity;
     }
 
-    DEVICE_QUALIFIER float tangential_force(float tangential_overlap, float tangential_velocity) const {
+    HOST_DEVICE_QUALIFIER float tangential_force(float tangential_overlap, float tangential_velocity) const {
         return kt * tangential_overlap + gamma_t * tangential_velocity;
     }
 };
@@ -219,12 +219,12 @@ struct DeviceEEPAContactView {
 struct DeviceJKRContactView {
     float work_of_adhesion, contact_radius0;
 
-    DEVICE_QUALIFIER float normal_force(float overlap, float velocity) const {
+    HOST_DEVICE_QUALIFIER float normal_force(float overlap, float velocity) const {
         float radius = contact_radius0 + overlap * 0.1f;
         return 6.0f * 3.14159f * work_of_adhesion * radius;
     }
 
-    DEVICE_QUALIFIER float tangential_force(float tangential_overlap, float tangential_velocity) const {
+    HOST_DEVICE_QUALIFIER float tangential_force(float tangential_overlap, float tangential_velocity) const {
         return 0.3f * normal_force(0, 0) * tangential_overlap;
     }
 };

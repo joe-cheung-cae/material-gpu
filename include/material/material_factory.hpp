@@ -348,6 +348,33 @@ class MaterialFactory {
     }
 };
 
+// Provide static builder shortcuts directly under MaterialFactory for convenience
+class MaterialFactoryShortcuts final : public MaterialFactory {
+  public:
+    static MaterialBuilder eepa() {
+        MaterialBuilder b;
+        // Provide reasonable defaults for EEPA contact
+        b.eepa_contact(1.0e6f, 5.0e5f, 0.3f, 0.15f);
+        return std::move(b);
+    }
+    static MaterialBuilder jkr() {
+        MaterialBuilder b;
+        // Provide reasonable defaults for JKR contact
+        b.jkr_contact(0.05f, 0.001f);
+        return std::move(b);
+    }
+    static MaterialBuilder standard() {
+        MaterialBuilder b;
+        b.no_contact();
+        return std::move(b);
+    }
+};
+
+// Convenience free functions for ADL-friendly calls
+inline MaterialBuilder MaterialFactory_eepa() { return MaterialFactoryShortcuts::eepa(); }
+inline MaterialBuilder MaterialFactory_jkr() { return MaterialFactoryShortcuts::jkr(); }
+inline MaterialBuilder MaterialFactory_standard() { return MaterialFactoryShortcuts::standard(); }
+
 // Registration macros for easy extension
 #define REGISTER_MATERIAL_FACTORY(MaterialClass, TypeName)                                                             \
     static bool g_##MaterialClass##_registered = []() {                                                                \
