@@ -56,13 +56,16 @@ if(ENABLE_CUDA)
   # CUDA compiler flags for optimization
   set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda")
   set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --expt-relaxed-constexpr")
+
   # Allow opting into fast math explicitly to maintain numerical consistency by default
   option(ENABLE_CUDA_FAST_MATH "Enable CUDA --use_fast_math in Release builds" OFF)
+
   if(ENABLE_CUDA_FAST_MATH)
     set(CMAKE_CUDA_FLAGS_RELEASE "${CMAKE_CUDA_FLAGS_RELEASE} -O3 --use_fast_math")
   else()
     set(CMAKE_CUDA_FLAGS_RELEASE "${CMAKE_CUDA_FLAGS_RELEASE} -O3")
   endif()
+
   set(CMAKE_CUDA_FLAGS_DEBUG "${CMAKE_CUDA_FLAGS_DEBUG} -g -G -O0")
 
   # Enable verbose compilation for debugging
