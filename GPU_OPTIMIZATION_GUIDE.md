@@ -16,10 +16,15 @@ The Material GPU library provides high-performance CUDA acceleration for materia
 - **Compute Capability 9.0+**: Hopper (H100)
 
 ### Auto-Detection
-The build system automatically detects your GPU architecture:
+CUDA is enabled by default and the build system automatically detects your GPU architecture:
 ```bash
-cmake -B build -DENABLE_CUDA=ON
+cmake -B build -DCMAKE_BUILD_TYPE=Release
 # Output: Detected CUDA architectures: 75;86;89
+```
+
+To force a CPU-only build (disable CUDA):
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF
 ```
 
 ## Performance Characteristics

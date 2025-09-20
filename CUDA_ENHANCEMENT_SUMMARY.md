@@ -156,7 +156,7 @@ include/material/
 └── device_qualifier.cuh       # 设备/主机限定符(增强)
 
 examples/
-├── example.cpp                # 主示例程序(增强)
+├── example.cu                 # 主示例程序(增强)
 └── gpu_benchmark.cpp         # GPU性能基准测试
 
 docs/

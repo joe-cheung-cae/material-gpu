@@ -1,5 +1,11 @@
 # Material GPU Library
 
+> Important: CUDA is enabled by default. If your environment does not have the NVIDIA CUDA toolkit or a CUDA-capable GPU, configure a CPU-only build with:
+
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF
+```
+
 A modern C++ material property library for DEM solvers with GPU acceleration support. Features advanced design patterns, compile-time optimization, and flexible material modeling capabilities.
 
 ## ✅ Status
@@ -59,6 +65,29 @@ git submodule update --init --recursive
 
 ### 2. Build Configuration
 
+#### Quick Start: CPU vs CUDA
+
+| Scenario         | Configure Command                                                | Build Command           | Run Commands (examples)                               |
+| ---------------- | ---------------------------------------------------------------- | ----------------------- | ------------------------------------------------------ |
+| CUDA-enabled (default) | `cmake -B build -DCMAKE_BUILD_TYPE=Release`                | `cmake --build build -j`| `./build/example` · `./build/gpu_benchmark`           |
+| CPU-only         | `cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF`    | `cmake --build build -j`| `./build/basic_demo` · `./build/advanced_gpu_demo 200 0.5 50` |
+
+Copy-paste setup:
+
+```bash
+# CUDA-enabled (default)
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j
+./build/example
+./build/gpu_benchmark
+
+# CPU-only override
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF
+cmake --build build -j
+./build/basic_demo
+./build/advanced_gpu_demo 200 0.5 50
+```
+
 #### Basic CPU-only Build
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
@@ -90,14 +119,20 @@ cmake --build build -j
 
 ### 3. Run Examples
 
-```bash
-# Run the comprehensive example program
-./build/example
+Note: The `example` binary is built from `examples/example.cu` and requires a CUDA-enabled build (`-DENABLE_CUDA=ON`). For CPU-only builds, use the CPU demos below.
 
-# Test with sample materials
+```bash
+# CPU-only demos (work with or without CUDA)
+./build/basic_demo
+./build/advanced_gpu_demo 200 0.5 50
+
+# CUDA build required for the main example
+# Make sure you configured with: -DENABLE_CUDA=ON
+./build/example
 ./build/example < examples/materials.json
 
-# Run GPU performance benchmark (if CUDA enabled)
+# GPU performance benchmark
+# Works best with CUDA enabled; falls back to CPU-only where applicable
 ./build/gpu_benchmark
 ```
 
@@ -331,7 +366,7 @@ material_gpu/
 │   ├── json_loader.cpp        # JSON implementation
 │   └── material_lib.cpp       # Library core
 ├── examples/                  # Example programs and data
-│   ├── example.cpp           # Comprehensive examples
+│   ├── example.cu            # Comprehensive examples (CUDA-enabled)
 │   └── materials.json        # Sample material definitions
 ├── third_party/              # External dependencies
 │   └── nlohmann_json/        # JSON library (git submodule)
@@ -360,7 +395,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 | Option             | Default   | Description                                 |
 | ------------------ | --------- | ------------------------------------------- |
-| `ENABLE_CUDA`      | `OFF`     | Enable CUDA support for GPU acceleration    |
+| `ENABLE_CUDA`      | `ON`      | Enable CUDA support for GPU acceleration    |
 | `CMAKE_BUILD_TYPE` | `Release` | Build type (Release, Debug, RelWithDebInfo) |
 
 ## 🐛 Troubleshooting
@@ -368,7 +403,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Common Issues
 
 1. **Submodule not found**: Run `git submodule update --init --recursive`
-2. **CUDA compilation errors**: Ensure CUDA toolkit is installed and `ENABLE_CUDA=ON`
+2. **CUDA compilation errors**: CUDA is enabled by default. If your environment lacks a CUDA-capable GPU or the CUDA toolkit, either install the toolkit or build CPU-only with:
+    ```bash
+    cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_CUDA=OFF
+    cmake --build build -j
+    ```
 3. **Missing nlohmann/json**: Verify git submodules are properly initialized
 
 ### Performance Tips

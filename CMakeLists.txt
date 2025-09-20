@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(material_gpu LANGUAGES C CXX)
 
 # Option to enable CUDA
-option(ENABLE_CUDA "Build with CUDA support" OFF)
+option(ENABLE_CUDA "Build with CUDA support" ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
